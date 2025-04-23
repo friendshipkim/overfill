@@ -2,12 +2,8 @@
 
 ![main](cover.png)
 
-This repo contains the code and released models for our paper:  
-[OverFill: Two-Stage Models for Efficient Language Model Decoding]()
+This repo contains the code and released models for our paper: [OverFill: Two-Stage Models for Efficient Language Model Decoding](). OverFill uses a full model for the prefill stage, processing system and user inputs in parallel. It then switches to a dense pruned model for sequential decoding. By leveraging more compute during prefill, OverFill achieves a better efficiency-accuracy tradeoff compared to traditional one-stage decoding.
 
-OverFill uses a full model for the *prefill* stage, processing system and user inputs in parallel. It then switches to a *dense pruned model* for token-by-token *decoding*. By leveraging more compute during prefill, OverFill achieves a better efficiency-accuracy tradeoff compared to traditional one-stage decoding.
-
----
 
 ## 💾 Released Models
 
@@ -16,7 +12,6 @@ We release OverFill decoders in two sizes:
 - [1B Decoder](https://huggingface.co/friendshipkim/overfill-Llama-3.2-3B-Instruct-pruned-h0.45-i0.45-a0.0-d0.0)
 - [3B Decoder](https://huggingface.co/friendshipkim/overfill-Llama-3.1-8B-Instruct-pruned-h0.43-i0.43-a0.0-d0.0)
 
----
 
 ## 🚀 Setup
 
@@ -52,24 +47,18 @@ cd ../..
 python -m pip install -e .
 ```
 
----
-
 ## 💡 Prepare Pruned Model
 
 You can either use existing pruned models:
 
-- Llama 3.2 3B → 1B:  
-  [friendshipkim/Llama-3.2-3B-Instruct-pruned-h0.45-i0.45-a0.0-d0.0](https://huggingface.co/friendshipkim/Llama-3.2-3B-Instruct-pruned-h0.45-i0.45-a0.0-d0.0)
-- Llama 3.1 8B → 3B:  
-  [friendshipkim/Llama-3.1-8B-Instruct-pruned-h0.43-i0.43-a0.0-d0.0-bf16](https://huggingface.co/friendshipkim/Llama-3.1-8B-Instruct-pruned-h0.43-i0.43-a0.0-d0.0-bf16)
+- Llama 3.2 3B → 1B: [friendshipkim/Llama-3.2-3B-Instruct-pruned-h0.45-i0.45-a0.0-d0.0](https://huggingface.co/friendshipkim/Llama-3.2-3B-Instruct-pruned-h0.45-i0.45-a0.0-d0.0)
+- Llama 3.1 8B → 3B: [friendshipkim/Llama-3.1-8B-Instruct-pruned-h0.43-i0.43-a0.0-d0.0-bf16](https://huggingface.co/friendshipkim/Llama-3.1-8B-Instruct-pruned-h0.43-i0.43-a0.0-d0.0-bf16)
 
-Or you can prune your own model and push it to the Hugging Face Hub or save it locally. Refer to the README in the `pruner` folder.
+Or you can prune your own model and push it to the Hugging Face Hub or save it locally. Refer to the README in the [pruner](./pruner/) folder.
 
----
 
 ## 🎓 Train
-
-We recommend using 8 GPUs. To change this, modify `recipes/accelerate_configs/deepspeed_zero3.yaml`.
+All training is configurable via YAML files located in the [recipes/](./recipes/) folder. We recommend using 8 GPUs. To change this, modify `recipes/accelerate_configs/deepspeed_zero3.yaml`.
 
 ### OverFill Training
 
@@ -110,8 +99,6 @@ ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_con
 # Finetune 8B → 3B
 ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml overfill/train_sft.py recipes/llama-3_1-8b-instruct/sft/pruned_width.yaml --report_to=wandb
 ```
-
----
 
 ## 🔢 Evaluate
 We use the [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) package to evaluate all models.
@@ -155,7 +142,6 @@ bash eval_scripts/overfill_1b saved_models/3b_instruct_overfill_h0.45-i0.45-a0.0
 bash eval_scripts/overfill_1b None gsm8k_cot_llama 4
 ```
 
----
 
 ## Citation
 
