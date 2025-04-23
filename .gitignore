@@ -6,7 +6,6 @@ tmp/*
 generation*
 *.out
 *.json
-*.png
 *.csv
 *.tar.gz
 # Byte-compiled / optimized / DLL files
