@@ -1,0 +1,14 @@
+model_name: meta-llama/Llama-3.2-3B-Instruct
+dataset_name: wikitext
+batch_size: 16
+max_seq_len: 512
+calib_size: 512
+
+# pruning parameters
+width_hidden: 0.45
+width_intermediate: 0.45
+width_attn: 0.0
+depth: 0.0
+batch_agg_func: l2
+pruned_idx_dir: ./pruned_idx
+depth_strategy: last
