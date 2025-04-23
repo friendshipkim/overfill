@@ -1,12 +1,9 @@
 # Model Pruner
 
-Utilities for static pruning of Transformer language models, currently supporting Llama models.
+Utilities for static pruning of Transformer language models, currently supporting Llama models. Implements the [Minitron-style](https://arxiv.org/abs/2407.14679) pruning by NVIDIA.
 
-Modified from:  
-https://github.com/alperiox/Compact-Language-Models-via-Pruning-and-Knowledge-Distillation  
-Implements the [Minitron-style](https://arxiv.org/abs/2407.14679) pruning by NVIDIA.
+Modified from: https://github.com/alperiox/Compact-Language-Models-via-Pruning-and-Knowledge-Distillation. 
 
----
 
 ## 🚀 Features
 
@@ -14,7 +11,6 @@ Implements the [Minitron-style](https://arxiv.org/abs/2407.14679) pruning by NVI
 - Configurable via YAML
 - Prunes using ratio or fixed width
 
----
 
 ## 🛠️ Pruning Options
 
@@ -27,13 +23,10 @@ The following pruning dimensions are supported:
 - `depth`:  
   - Ratio of transformer blocks to keep
 
----
 
 ## 📁 Configs
 
 Example pruning configs used in our paper are available in the `configs/` directory.
-
----
 
 ## 🔧 Usage
 
